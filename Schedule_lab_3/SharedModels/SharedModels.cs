@@ -162,15 +162,11 @@ public enum OptimizationStatus
 
 public static class RabbitMqSettings
 {
-    // For Docker: use service name
     public const string HostName = "rabbitmq";
-    
-    // For local development: use "localhost"
-    // public const string HostName = "localhost";
-    
     public const string ExchangeName = "schedule_exchange";
     public const string QueueName = "schedule_queue";
     public const string RoutingKeyOptimized = "schedule.optimized";
-    public const string RoutingKeyUpdated = "schedule.updated";
-    public const string RoutingKeyConflict = "schedule.conflict";
+    public const string RoutingKeyUpdated   = "schedule.updated";
+    public const string RoutingKeyConflict  = "schedule.conflict";
 }
+

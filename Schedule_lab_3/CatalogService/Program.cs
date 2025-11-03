@@ -155,17 +155,6 @@ app.MapPost("/api/catalog/subjects", async (Subject subject, ICatalogRepository 
 .WithName("AddSubject")
 .WithOpenApi();
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-    });
-});
-
-// After app is built
-app.UseCors();
-
 app.Run();
 
 public interface ICatalogRepository

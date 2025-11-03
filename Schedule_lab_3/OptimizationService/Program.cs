@@ -119,17 +119,6 @@ app.MapGet("/api/optimization/status/{scheduleId}", (int scheduleId) =>
 .WithName("GetOptimizationStatus")
 .WithOpenApi();
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-    });
-});
-
-// After app is built
-app.UseCors();
-
 app.Run();
 
 public interface IOptimizationEngine

@@ -1,0 +1,116 @@
+name: as_lab_3
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.13-management
+    container_name: schedule_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+
+  catalog_service:
+    build:
+      context: ./Schedule_lab_3
+      dockerfile: CatalogService/Dockerfile
+    container_name: catalog_service
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app_network
+    # ports:
+    #   - "5001:8080"  # (за потреби Swagger локально)
+
+  schedule_service:
+    build:
+      context: ./Schedule_lab_3
+      dockerfile: ScheduleService/Dockerfile
+    container_name: schedule_service
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app_network
+    # ports:
+    #   - "5002:8080"
+
+  analytics_service:
+    build:
+      context: ./Schedule_lab_3
+      dockerfile: AnalyticsService/Dockerfile
+    container_name: analytics_service
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app_network
+    # ports:
+    #   - "5003:8080"
+
+  notification_service:
+    build:
+      context: ./Schedule_lab_3
+      dockerfile: NotificationService/Dockerfile
+    container_name: notification_service
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app_network
+    # ports:
+    #   - "5004:8080"
+
+  optimization_service:
+    build:
+      context: ./Schedule_lab_3
+      dockerfile: OptimizationService/Dockerfile
+    container_name: optimization_service
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app_network
+    # ports:
+    #   - "5005:8080"
+
+  frontend:
+    build:
+      context: ./Client_lab_3/schedule-ui
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - schedule_service
+      - catalog_service
+      - analytics_service
+      - notification_service
+      - optimization_service
+    restart: unless-stopped
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

@@ -105,9 +105,9 @@ export default function ScheduleManagementApp() {
   const loadCatalogData = async (): Promise<void> => {
     try {
       const [teachersRes, groupsRes, roomsRes] = await Promise.all([
-        fetch("http://localhost:5003/api/catalog/teachers"),
-        fetch("http://localhost:5003/api/catalog/groups"),
-        fetch("http://localhost:5003/api/catalog/rooms"),
+        fetch("http://localhost:5103/api/catalog/teachers"),
+        fetch("http://localhost:5103/api/catalog/groups"),
+        fetch("http://localhost:5103/api/catalog/rooms"),
       ]);
       
       setTeachers(await teachersRes.json());
@@ -250,7 +250,6 @@ export default function ScheduleManagementApp() {
           <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 mb-2">
             Schedule Management System
           </h1>
-          <p className="text-slate-400 text-lg">Microservices Architecture Demo - Lab 3 & 4</p>
         </div>
 
         <div className="flex gap-4 mb-6">

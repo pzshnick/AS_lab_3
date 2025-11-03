@@ -66,17 +66,6 @@ app.MapGet("/api/analytics/events", (IAnalyticsRepository repo) =>
 .WithName("GetRecentEvents")
 .WithOpenApi();
 
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-    });
-});
-
-// After app is built
-app.UseCors();
-
 app.Run();
 
 public interface IAnalyticsRepository
@@ -123,18 +112,50 @@ public class InMemoryAnalyticsRepository : IAnalyticsRepository
     {
         _events.Add(analyticsEvent);
         
-        switch (analyticsEvent.Type)
+        var eventType = analyticsEvent.RoutingKey.Split('.').LastOrDefault()?.ToLower();
+    
+        switch (eventType)
         {
-            case "Optimization":
+            case "optimized":
                 _totalOptimizations++;
                 break;
-            case "Conflict":
+            case "conflict":
                 _totalConflicts++;
                 break;
-            case "Update":
+            case "updated":
+            case "created":
+            case "deleted":
                 _totalUpdates++;
                 break;
         }
+    
+        // Якщо це подія створення - додаємо до лічильника розкладів
+        if (analyticsEvent.Payload.Contains("\"ChangeType\":\"Created\""))
+        {
+            var scheduleId = ExtractScheduleId(analyticsEvent.Payload);
+            if (scheduleId > 0 && !_scheduleMetrics.ContainsKey(scheduleId))
+            {
+                _scheduleMetrics[scheduleId] = new ScheduleMetrics
+                {
+                    ScheduleId = scheduleId,
+                    LastCalculated = DateTime.Now
+                };
+            }
+        }
+    }
+
+    private int ExtractScheduleId(string json)
+    {
+        try
+        {
+            var doc = System.Text.Json.JsonDocument.Parse(json);
+            if (doc.RootElement.TryGetProperty("ScheduleId", out var prop))
+            {
+                return prop.GetInt32();
+            }
+        }
+        catch { }
+        return 0;
     }
 
     public void UpdateScheduleMetrics(int scheduleId, ScheduleMetrics metrics)
@@ -179,7 +200,17 @@ public class EventConsumerService : BackgroundService
             await _channel.QueueBindAsync(
                 queue: queueName,
                 exchange: RabbitMqSettings.ExchangeName,
-                routingKey: "schedule.*");
+                routingKey: "schedule.updated");
+
+            await _channel.QueueBindAsync(
+                queue: queueName,
+                exchange: RabbitMqSettings.ExchangeName,
+                routingKey: "schedule.optimized");
+
+            await _channel.QueueBindAsync(
+                queue: queueName,
+                exchange: RabbitMqSettings.ExchangeName,
+                routingKey: "schedule.conflict");
 
             Console.WriteLine($"Analytics listening on queue '{queueName}'");
 

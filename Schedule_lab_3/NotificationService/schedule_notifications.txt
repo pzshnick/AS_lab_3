@@ -20,3 +20,1615 @@
  Updated At: 2025-11-03 00:05:35
 ╚═══════════════════════════════════════════════════════════╝
 
+[2025-11-03 11:03:50]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:03:49
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:04:10]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025dfg' created
+ Updated At: 2025-11-03 11:04:10
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:23]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:26:23
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:29]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:26:29
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:29]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:26:29
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:32]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 17
+ Load Balance Improvement: 27.09%
+ Conflicts Resolved: 4
+ Optimized At: 2025-11-03 11:26:32
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:32]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:26:32
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:32]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:26:32
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:33]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:26:33
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:33]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:26:33
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:35]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 5
+ Load Balance Improvement: 31.18%
+ Conflicts Resolved: 5
+ Optimized At: 2025-11-03 11:26:35
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:36]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 22
+ Load Balance Improvement: 26.94%
+ Conflicts Resolved: 7
+ Optimized At: 2025-11-03 11:26:36
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:39]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Updated By: System
+ Change Type: Deleted
+ Details: Schedule deleted
+ Updated At: 2025-11-03 11:26:39
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:42]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:26:42
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:43]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:26:43
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:43]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:26:43
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:43]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:26:43
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:44]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:26:44
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:54]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:26:54
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:26:58]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 8
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:26:58
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:20]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:20
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:20]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:20
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:23]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 7
+ Load Balance Improvement: 37.13%
+ Conflicts Resolved: 2
+ Optimized At: 2025-11-03 11:27:23
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:37]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:37
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:37]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:37
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:38]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:38
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:38]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:38
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:39]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:39
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:39]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:39
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:39]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:39
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:39]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:39
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:40]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 13
+ Load Balance Improvement: 16.96%
+ Conflicts Resolved: 8
+ Optimized At: 2025-11-03 11:27:40
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:41]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:41
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:41]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:41
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:41]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 21
+ Load Balance Improvement: 33.59%
+ Conflicts Resolved: 11
+ Optimized At: 2025-11-03 11:27:41
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:42]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:42
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:42]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:42
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:42]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 16
+ Load Balance Improvement: 21.31%
+ Conflicts Resolved: 8
+ Optimized At: 2025-11-03 11:27:42
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:42]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 15
+ Load Balance Improvement: 28.68%
+ Conflicts Resolved: 6
+ Optimized At: 2025-11-03 11:27:42
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:43]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 8
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:43
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:43]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 8
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:27:43
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:44]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 13
+ Load Balance Improvement: 29.08%
+ Conflicts Resolved: 1
+ Optimized At: 2025-11-03 11:27:44
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:45]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 6
+ Load Balance Improvement: 16.12%
+ Conflicts Resolved: 11
+ Optimized At: 2025-11-03 11:27:45
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:46]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 8
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 19
+ Load Balance Improvement: 38.08%
+ Conflicts Resolved: 14
+ Optimized At: 2025-11-03 11:27:46
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:27:53]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Updated By: System
+ Change Type: Deleted
+ Details: Schedule deleted
+ Updated At: 2025-11-03 11:27:53
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:19]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:34:19
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:20]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:34:20
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:20]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:34:20
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:21]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:34:21
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:31]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:34:30
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:31]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:34:30
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:31]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:34:31
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:31]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:34:31
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:31]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:34:31
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:31]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:34:31
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:34]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 9
+ Load Balance Improvement: 19.94%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:34:34
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:34]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 19
+ Load Balance Improvement: 23.55%
+ Conflicts Resolved: 8
+ Optimized At: 2025-11-03 11:34:34
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:34:34]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 10
+ Load Balance Improvement: 16.61%
+ Conflicts Resolved: 2
+ Optimized At: 2025-11-03 11:34:34
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:28]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:35:28
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:28]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:35:28
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:28]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:35:28
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:28]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:35:28
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:41]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:35:41
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:42]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:35:42
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:42]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:35:42
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:45]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:45
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:45]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:45
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:45]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:45
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:45]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:45
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:46]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:46
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:46]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:46
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:47]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:47
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:47]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:47
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:48]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:48
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:48]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:48
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:48]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 15
+ Load Balance Improvement: 27.68%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:48
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:48]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 24
+ Load Balance Improvement: 24.96%
+ Conflicts Resolved: 10
+ Optimized At: 2025-11-03 11:35:48
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:49]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:49
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:49]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:49
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:49]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 18
+ Load Balance Improvement: 29.08%
+ Conflicts Resolved: 10
+ Optimized At: 2025-11-03 11:35:49
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:49]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:49
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:49]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:35:49
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:50]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 21
+ Load Balance Improvement: 18.19%
+ Conflicts Resolved: 8
+ Optimized At: 2025-11-03 11:35:50
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:51]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 18
+ Load Balance Improvement: 15.89%
+ Conflicts Resolved: 1
+ Optimized At: 2025-11-03 11:35:51
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:52]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 21
+ Load Balance Improvement: 35.54%
+ Conflicts Resolved: 13
+ Optimized At: 2025-11-03 11:35:52
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:35:52]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 23
+ Load Balance Improvement: 15.75%
+ Conflicts Resolved: 7
+ Optimized At: 2025-11-03 11:35:52
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:08]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:08
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:09]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:09
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:09]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:09
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:09]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:09
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:09]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:09
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:10]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:10
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:10]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:10
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:10]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 8
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:10
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:10]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE UPDATE NOTIFICATION                              ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 9
+ Updated By: System
+ Change Type: Created
+ Details: Schedule 'Winter Semester 2025' created
+ Updated At: 2025-11-03 11:40:10
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:16]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:16
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:16]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:16
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:16]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:16
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:17]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:16
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:17]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:17
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:17]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:17
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:18]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:18
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:18]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:18
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:19]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:19
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:19]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:19
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:19]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 1
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 6
+ Load Balance Improvement: 12.69%
+ Conflicts Resolved: 13
+ Optimized At: 2025-11-03 11:40:19
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:20]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 2
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 15
+ Load Balance Improvement: 28.21%
+ Conflicts Resolved: 9
+ Optimized At: 2025-11-03 11:40:20
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:20]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:20
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:20]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:20
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:20]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 3
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 19
+ Load Balance Improvement: 20.57%
+ Conflicts Resolved: 7
+ Optimized At: 2025-11-03 11:40:20
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:21]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:21
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:21]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:21
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:21]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 4
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 8
+ Load Balance Improvement: 33.07%
+ Conflicts Resolved: 2
+ Optimized At: 2025-11-03 11:40:21
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:22]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 8
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:22
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:22]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 8
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:22
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:22]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 9
+ Schedule Name: Winter Semester 2025
+ Status: Started
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:22
+ Message: Optimization process started
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:22]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 9
+ Schedule Name: Winter Semester 2025
+ Status: InProgress
+ Windows Reduced: 0
+ Load Balance Improvement: 0%
+ Conflicts Resolved: 0
+ Optimized At: 2025-11-03 11:40:22
+ Message: Optimization in progress...
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:22]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 5
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 6
+ Load Balance Improvement: 35.83%
+ Conflicts Resolved: 4
+ Optimized At: 2025-11-03 11:40:22
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:23]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 6
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 8
+ Load Balance Improvement: 22.09%
+ Conflicts Resolved: 8
+ Optimized At: 2025-11-03 11:40:23
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:24]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 7
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 17
+ Load Balance Improvement: 37.43%
+ Conflicts Resolved: 7
+ Optimized At: 2025-11-03 11:40:24
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:25]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 8
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 20
+ Load Balance Improvement: 23.04%
+ Conflicts Resolved: 1
+ Optimized At: 2025-11-03 11:40:25
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
+[2025-11-03 11:40:25]
+╔═══════════════════════════════════════════════════════════╗
+║ SCHEDULE OPTIMIZATION NOTIFICATION                        ║
+╠═══════════════════════════════════════════════════════════╣
+ Schedule ID: 9
+ Schedule Name: Winter Semester 2025
+ Status: Completed
+ Windows Reduced: 15
+ Load Balance Improvement: 34.76%
+ Conflicts Resolved: 13
+ Optimized At: 2025-11-03 11:40:25
+ Message: Schedule successfully optimized
+╚═══════════════════════════════════════════════════════════╝
+
