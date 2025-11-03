@@ -1,0 +1,6 @@
+@OptimizationService_HostAddress = http://localhost:5228
+
+GET {{OptimizationService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

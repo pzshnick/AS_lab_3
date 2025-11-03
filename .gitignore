@@ -1,0 +1,132 @@
+# ==========================================================
+# === GLOBAL SETTINGS
+# ==========================================================
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / Editors
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Logs & Temp
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.pid
+*.seed
+*.pid.lock
+*.tmp
+*.temp
+
+# ==========================================================
+# === BACKEND (.NET + Python)
+# ==========================================================
+# Build outputs
+bin/
+obj/
+out/
+[Bb]uild/
+[Dd]ebug*/
+[Rr]elease*/
+publish/
+TestResults/
+
+# .NET / Rider
+*.DotSettings.user
+_ReSharper*/
+*.resharper
+*.ncrunch*
+*.vs/
+*.userprefs
+*.orig
+*.lock.json
+
+# Entity Framework migrations backups
+*.bak
+
+# Python microservices
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.egg
+*.venv/
+.venv/
+venv/
+env/
+ENV/
+.Python
+
+# ==========================================================
+# === FRONTEND (React + Vite)
+# ==========================================================
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# ==========================================================
+# === DOCKER / DEPLOYMENT
+# ==========================================================
+# Docker
+**/docker-compose.override.yml
+**/docker-compose.local.yml
+**/Dockerfile.local
+**/.docker/
+**/.dockerignore
+
+# ==========================================================
+# === MISC
+# ==========================================================
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Data & uploads
+uploads/
+media/
+data/
+*.db
+*.sqlite
+
+# ==========================================================
+# === PROJECT SPECIFIC (schedule-automation)
+# ==========================================================
+# Compiled migrations
+backend/**/Migrations/
+backend/**/bin/
+backend/**/obj/
+backend/**/logs/
+
+# Python build artifacts
+backend/**/__pycache__/
+backend/**/temp/
+backend/**/output/
+
+# VS / Rider caches
+backend/**/.vs/
+backend/**/.idea/
+backend/**/.rider/
