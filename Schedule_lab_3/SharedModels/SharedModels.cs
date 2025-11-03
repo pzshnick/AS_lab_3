@@ -32,6 +32,69 @@ public enum ScheduleStatus
     Archived
 }
 
+// Catalog entities
+public class Teacher
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string Department { get; set; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
+}
+
+public class Group
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public int Year { get; set; }
+    public int StudentsCount { get; set; }
+}
+
+public class Room
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public int Capacity { get; set; }
+    public string Type { get; set; } = string.Empty;
+}
+
+public class Subject
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public int Credits { get; set; }
+    public string Description { get; set; } = string.Empty;
+}
+
+// Analytics entities
+public class SystemStatistics
+{
+    public int TotalSchedules { get; set; }
+    public int TotalOptimizations { get; set; }
+    public int TotalConflictsDetected { get; set; }
+    public int TotalUpdates { get; set; }
+    public double AverageOptimizationTime { get; set; }
+    public DateTime LastUpdated { get; set; }
+}
+
+public class ScheduleMetrics
+{
+    public int ScheduleId { get; set; }
+    public int TotalWindows { get; set; }
+    public int TotalConflicts { get; set; }
+    public double AverageLoadBalance { get; set; }
+    public int OptimizationCount { get; set; }
+    public DateTime LastCalculated { get; set; }
+}
+
+public class AnalyticsEvent
+{
+    public string Type { get; set; } = string.Empty;
+    public string RoutingKey { get; set; } = string.Empty;
+    public string Payload { get; set; } = string.Empty;
+    public DateTime Timestamp { get; set; }
+}
+
+// Optimization
 public class OptimizationRequest
 {
     public int ScheduleId { get; set; }
@@ -58,6 +121,7 @@ public class OptimizationResult
     public string Message { get; set; } = string.Empty;
 }
 
+// Events
 public class ScheduleOptimizedEvent
 {
     public int ScheduleId { get; set; }
@@ -98,7 +162,12 @@ public enum OptimizationStatus
 
 public static class RabbitMqSettings
 {
-    public const string HostName = "localhost";
+    // For Docker: use service name
+    public const string HostName = "rabbitmq";
+    
+    // For local development: use "localhost"
+    // public const string HostName = "localhost";
+    
     public const string ExchangeName = "schedule_exchange";
     public const string QueueName = "schedule_queue";
     public const string RoutingKeyOptimized = "schedule.optimized";

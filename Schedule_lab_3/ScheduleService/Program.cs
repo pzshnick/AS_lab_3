@@ -177,6 +177,17 @@ app.MapPost("/api/schedules/{id}/check-conflicts", async (int id, IScheduleRepos
 .WithName("CheckConflicts")
 .WithOpenApi();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
+// After app is built
+app.UseCors();
+
 app.Run();
 
 static List<string> CheckConflicts(Schedule schedule)
