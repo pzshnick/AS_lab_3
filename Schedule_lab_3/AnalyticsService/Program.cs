@@ -81,6 +81,7 @@ public class InMemoryAnalyticsRepository : IAnalyticsRepository
 {
     private readonly List<AnalyticsEvent> _events = new();
     private readonly Dictionary<int, ScheduleMetrics> _scheduleMetrics = new();
+    private readonly HashSet<int> _activeScheduleIds = new();
     private int _totalOptimizations = 0;
     private int _totalConflicts = 0;
     private int _totalUpdates = 0;
@@ -89,7 +90,7 @@ public class InMemoryAnalyticsRepository : IAnalyticsRepository
     {
         return new SystemStatistics
         {
-            TotalSchedules = _scheduleMetrics.Count,
+            TotalSchedules = _activeScheduleIds.Count,
             TotalOptimizations = _totalOptimizations,
             TotalConflictsDetected = _totalConflicts,
             TotalUpdates = _totalUpdates,
@@ -111,36 +112,51 @@ public class InMemoryAnalyticsRepository : IAnalyticsRepository
     public void RecordEvent(AnalyticsEvent analyticsEvent)
     {
         _events.Add(analyticsEvent);
-        
+
         var eventType = analyticsEvent.RoutingKey.Split('.').LastOrDefault()?.ToLower();
-    
+        var changeType = ExtractChangeType(analyticsEvent.Payload);
+        var scheduleId = ExtractScheduleId(analyticsEvent.Payload);
+
+        Console.WriteLine($"[Analytics] Processing event - Type: {eventType}, ChangeType: {changeType}, ScheduleId: {scheduleId}");
+        Console.WriteLine($"[Analytics] Current stats - Schedules: {_activeScheduleIds.Count}, Optimizations: {_totalOptimizations}, Conflicts: {_totalConflicts}, Updates: {_totalUpdates}");
+
         switch (eventType)
         {
             case "optimized":
                 _totalOptimizations++;
+                Console.WriteLine($"[Analytics] Optimization recorded. Total: {_totalOptimizations}");
                 break;
             case "conflict":
                 _totalConflicts++;
+                Console.WriteLine($"[Analytics] Conflict recorded. Total: {_totalConflicts}");
                 break;
             case "updated":
-            case "created":
-            case "deleted":
                 _totalUpdates++;
-                break;
-        }
-    
-        // Якщо це подія створення - додаємо до лічильника розкладів
-        if (analyticsEvent.Payload.Contains("\"ChangeType\":\"Created\""))
-        {
-            var scheduleId = ExtractScheduleId(analyticsEvent.Payload);
-            if (scheduleId > 0 && !_scheduleMetrics.ContainsKey(scheduleId))
-            {
-                _scheduleMetrics[scheduleId] = new ScheduleMetrics
+                Console.WriteLine($"[Analytics] Update recorded. Total: {_totalUpdates}");
+
+                // Handle schedule creation and deletion
+                if (changeType == "Created" && scheduleId > 0)
                 {
-                    ScheduleId = scheduleId,
-                    LastCalculated = DateTime.Now
-                };
-            }
+                    _activeScheduleIds.Add(scheduleId);
+                    Console.WriteLine($"[Analytics] Schedule #{scheduleId} created. Active schedules: {_activeScheduleIds.Count}");
+                    if (!_scheduleMetrics.ContainsKey(scheduleId))
+                    {
+                        _scheduleMetrics[scheduleId] = new ScheduleMetrics
+                        {
+                            ScheduleId = scheduleId,
+                            LastCalculated = DateTime.Now
+                        };
+                    }
+                }
+                else if (changeType == "Deleted" && scheduleId > 0)
+                {
+                    _activeScheduleIds.Remove(scheduleId);
+                    Console.WriteLine($"[Analytics] Schedule #{scheduleId} deleted. Active schedules: {_activeScheduleIds.Count}");
+                }
+                break;
+            default:
+                Console.WriteLine($"[Analytics] Unknown event type: {eventType}");
+                break;
         }
     }
 
@@ -156,6 +172,20 @@ public class InMemoryAnalyticsRepository : IAnalyticsRepository
         }
         catch { }
         return 0;
+    }
+
+    private string ExtractChangeType(string json)
+    {
+        try
+        {
+            var doc = System.Text.Json.JsonDocument.Parse(json);
+            if (doc.RootElement.TryGetProperty("ChangeType", out var prop))
+            {
+                return prop.GetString() ?? string.Empty;
+            }
+        }
+        catch { }
+        return string.Empty;
     }
 
     public void UpdateScheduleMetrics(int scheduleId, ScheduleMetrics metrics)
@@ -181,9 +211,36 @@ public class EventConsumerService : BackgroundService
 
         try
         {
-            var factory = new ConnectionFactory { HostName = RabbitMqSettings.HostName };
-            _connection = await factory.CreateConnectionAsync();
-            _channel = await _connection.CreateChannelAsync();
+            var factory = new ConnectionFactory
+            {
+                HostName = RabbitMqSettings.HostName,
+                UserName = RabbitMqSettings.UserName,
+                Password = RabbitMqSettings.Password,
+                RequestedConnectionTimeout = TimeSpan.FromSeconds(30),
+                SocketReadTimeout = TimeSpan.FromSeconds(30),
+                SocketWriteTimeout = TimeSpan.FromSeconds(30)
+            };
+
+            // Retry logic for RabbitMQ connection
+            const int maxRetries = 10;
+            const int retryDelayMs = 2000;
+
+            for (int i = 1; i <= maxRetries; i++)
+            {
+                try
+                {
+                    Console.WriteLine($"Attempting to connect to RabbitMQ... ({i}/{maxRetries})");
+                    _connection = await factory.CreateConnectionAsync(stoppingToken);
+                    _channel = await _connection.CreateChannelAsync(cancellationToken: stoppingToken);
+                    Console.WriteLine("Successfully connected to RabbitMQ");
+                    break;
+                }
+                catch (Exception ex) when (i < maxRetries)
+                {
+                    Console.WriteLine($"Connection failed (attempt {i}/{maxRetries}): {ex.Message}");
+                    await Task.Delay(retryDelayMs, stoppingToken);
+                }
+            }
 
             await _channel.ExchangeDeclareAsync(
                 exchange: RabbitMqSettings.ExchangeName,
@@ -223,6 +280,9 @@ public class EventConsumerService : BackgroundService
                     var json = Encoding.UTF8.GetString(body);
                     var routingKey = ea.RoutingKey;
 
+                    Console.WriteLine($"[Analytics Consumer] Received event - RoutingKey: {routingKey}");
+                    Console.WriteLine($"[Analytics Consumer] Payload: {json}");
+
                     var analyticsEvent = new AnalyticsEvent
                     {
                         Type = routingKey.Split('.').Last(),
@@ -232,12 +292,13 @@ public class EventConsumerService : BackgroundService
                     };
 
                     _repository.RecordEvent(analyticsEvent);
-                    
-                    Console.WriteLine($"[Analytics] Recorded event: {routingKey}");
+
+                    Console.WriteLine($"[Analytics Consumer] Successfully recorded event: {routingKey}");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[Analytics Error] {ex.Message}");
+                    Console.WriteLine($"[Analytics Consumer Error] {ex.Message}");
+                    Console.WriteLine($"[Analytics Consumer Error] Stack: {ex.StackTrace}");
                 }
                 await Task.Yield();
             };

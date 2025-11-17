@@ -59,7 +59,8 @@ export default function ScheduleManagementApp() {
   const [rooms, setRooms] = useState<CatalogItem[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<"schedules" | "analytics">("schedules");
-  
+  const [selectedScheduleId, setSelectedScheduleId] = useState<number | null>(null);
+
   const [formData, setFormData] = useState({
     scheduleName: "Winter Semester 2025",
     subject: "",
@@ -75,19 +76,12 @@ export default function ScheduleManagementApp() {
     loadSchedules().catch(() => addNotification("error", "Failed to load schedules"));
     loadCatalogData().catch(() => addNotification("error", "Failed to load catalog data"));
     loadStatistics().catch(() => addNotification("error", "Failed to load statistics"));
-    
+
+    // Refresh statistics periodically
     const interval = setInterval(() => {
       loadStatistics();
-      const sample: Array<{ type: NotificationType; text: string }> = [
-        { type: "optimized", text: "Optimization completed successfully" },
-        { type: "updated", text: "Schedule updated" },
-        { type: "optimized", text: "Reduced windows count by 15" },
-        { type: "updated", text: "Improved load balance by 25%" },
-      ];
-      const m = sample[Math.floor(Math.random() * sample.length)];
-      addNotification(m.type, m.text);
-    }, 8000);
-    
+    }, 5000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -132,43 +126,111 @@ export default function ScheduleManagementApp() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    const schedule = {
-      name: formData.scheduleName,
-      entries: formData.subject
-        ? [{
-            subject: formData.subject,
-            teacher: formData.teacher,
-            group: formData.group,
-            room: formData.room,
-            dayOfWeek: parseInt(formData.dayOfWeek, 10) as DayOfWeek,
-            startTime: `${formData.startTime}:00`,
-            endTime: `${formData.endTime}:00`,
-          } satisfies ScheduleEntry]
-        : [],
+
+    // Validation: Check if adding a class entry
+    if (!formData.subject.trim()) {
+      addNotification("error", "Subject is required");
+      return;
+    }
+
+    if (!formData.teacher.trim() || !formData.group.trim() || !formData.room.trim()) {
+      addNotification("error", "All fields must be filled when adding a class");
+      return;
+    }
+
+    // End time must be after start time
+    if (formData.endTime <= formData.startTime) {
+      addNotification("error", "End time must be after start time");
+      return;
+    }
+
+    const newEntry: ScheduleEntry = {
+      subject: formData.subject,
+      teacher: formData.teacher,
+      group: formData.group,
+      room: formData.room,
+      dayOfWeek: parseInt(formData.dayOfWeek, 10) as DayOfWeek,
+      startTime: `${formData.startTime}:00`,
+      endTime: `${formData.endTime}:00`,
     };
 
-    const response = await fetch(`${API_BASE}/schedules`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(schedule),
-    });
+    // If schedule is selected, add to existing schedule
+    if (selectedScheduleId !== null) {
+      const existingSchedule = schedules.find(s => s.id === selectedScheduleId);
+      if (!existingSchedule) {
+        addNotification("error", "Selected schedule not found");
+        return;
+      }
 
-    if (response.ok) {
-      addNotification("updated", `Created schedule: ${schedule.name}`);
-      setFormData({
-        scheduleName: "Winter Semester 2025",
-        subject: "",
-        teacher: "",
-        group: "",
-        room: "",
-        dayOfWeek: "1",
-        startTime: "09:00",
-        endTime: "10:30",
+      const updatedSchedule = {
+        ...existingSchedule,
+        entries: [...existingSchedule.entries, newEntry],
+      };
+
+      const response = await fetch(`${API_BASE}/schedules/${selectedScheduleId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedSchedule),
       });
-      await loadSchedules();
-      await loadStatistics();
+
+      if (response.ok) {
+        addNotification("updated", `Added class to schedule: ${existingSchedule.name}`);
+        setFormData({
+          ...formData,
+          subject: "",
+          teacher: "",
+          group: "",
+          room: "",
+        });
+        await loadSchedules();
+        await loadStatistics();
+      } else {
+        const errorData = await response.json().catch(() => null);
+        if (errorData && errorData.conflicts) {
+          errorData.conflicts.forEach((conflict: string) => {
+            addNotification("conflict", conflict);
+          });
+        } else {
+          addNotification("error", errorData?.error || "Failed to add class to schedule");
+        }
+      }
     } else {
-      addNotification("error", "Failed to create schedule");
+      // Create new schedule
+      const schedule = {
+        name: formData.scheduleName,
+        entries: [newEntry],
+      };
+
+      const response = await fetch(`${API_BASE}/schedules`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(schedule),
+      });
+
+      if (response.ok) {
+        addNotification("updated", `Created schedule: ${schedule.name}`);
+        setFormData({
+          scheduleName: "Winter Semester 2025",
+          subject: "",
+          teacher: "",
+          group: "",
+          room: "",
+          dayOfWeek: "1",
+          startTime: "09:00",
+          endTime: "10:30",
+        });
+        await loadSchedules();
+        await loadStatistics();
+      } else {
+        const errorData = await response.json().catch(() => null);
+        if (errorData && errorData.conflicts) {
+          errorData.conflicts.forEach((conflict: string) => {
+            addNotification("conflict", conflict);
+          });
+        } else {
+          addNotification("error", errorData?.error || "Failed to create schedule");
+        }
+      }
     }
   };
 
@@ -288,15 +350,41 @@ export default function ScheduleManagementApp() {
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-semibold text-slate-300 mb-1">Schedule Name</label>
-                  <input
-                    type="text"
-                    value={formData.scheduleName}
-                    onChange={(e) => setFormData({ ...formData, scheduleName: e.target.value })}
+                  <label className="block text-sm font-semibold text-slate-300 mb-1">Select Existing Schedule</label>
+                  <select
+                    value={selectedScheduleId ?? ""}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setSelectedScheduleId(val ? parseInt(val, 10) : null);
+                    }}
                     className="w-full px-4 py-2 bg-slate-900/50 border-2 border-slate-700 rounded-lg focus:border-cyan-500 focus:outline-none text-slate-200"
-                    required
-                  />
+                  >
+                    <option value="">-- Create New Schedule --</option>
+                    {schedules.map((schedule) => (
+                      <option key={schedule.id} value={schedule.id}>
+                        {schedule.name} (ID: {schedule.id}, Classes: {schedule.entries.length})
+                      </option>
+                    ))}
+                  </select>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {selectedScheduleId
+                      ? "Adding class to existing schedule"
+                      : "Creating new schedule with first class"}
+                  </p>
                 </div>
+
+                {!selectedScheduleId && (
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-300 mb-1">New Schedule Name</label>
+                    <input
+                      type="text"
+                      value={formData.scheduleName}
+                      onChange={(e) => setFormData({ ...formData, scheduleName: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-900/50 border-2 border-slate-700 rounded-lg focus:border-cyan-500 focus:outline-none text-slate-200"
+                      required
+                    />
+                  </div>
+                )}
 
                 <div className="border-t border-slate-700 pt-4">
                   <h3 className="font-semibold text-slate-300 mb-3">Add Class</h3>
@@ -389,7 +477,7 @@ export default function ScheduleManagementApp() {
                   type="submit"
                   className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold py-3 rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transform hover:-translate-y-0.5 transition-all"
                 >
-                  Create Schedule
+                  {selectedScheduleId ? "Add Class to Schedule" : "Create New Schedule"}
                 </button>
               </form>
             </div>
@@ -421,21 +509,35 @@ export default function ScheduleManagementApp() {
                 ) : (
                   schedules.map((schedule) => (
                     <div key={schedule.id} className="bg-slate-900/50 border border-cyan-500/30 p-4 rounded-xl">
-                      <div className="flex items-start justify-between mb-2">
-                        <h3 className="text-lg font-bold text-slate-200">{schedule.name}</h3>
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${statusClasses[schedule.status]}`}>
-                          {statusNames[schedule.status]}
-                        </span>
-                      </div>
-
-                      <div className="text-sm text-slate-400 space-y-1 mb-3">
-                        <p><strong>ID:</strong> {schedule.id}</p>
-                        <p><strong>Created:</strong> {new Date(schedule.createdAt).toLocaleString("en-US")}</p>
-                        <p><strong>Classes:</strong> {schedule.entries?.length ?? 0}</p>
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold text-slate-200 mb-2">{schedule.name}</h3>
+                          <div className="text-sm text-slate-400 space-y-1">
+                            <p><strong>ID:</strong> {schedule.id}</p>
+                            <p><strong>Created:</strong> {new Date(schedule.createdAt).toLocaleString("en-US")}</p>
+                            <p><strong>Classes:</strong> {schedule.entries?.length ?? 0}</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col items-end gap-2">
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${statusClasses[schedule.status]}`}>
+                            {statusNames[schedule.status]}
+                          </span>
+                          <div className="flex gap-1">
+                            <button onClick={() => optimizeSchedule(schedule.id)} className="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 p-2 rounded-lg text-xs font-semibold border border-emerald-500/50 transition-all" title="Optimize Schedule">
+                              <Zap className="w-4 h-4" />
+                            </button>
+                            <button onClick={() => checkConflicts(schedule.id)} className="bg-orange-500/20 hover:bg-orange-500/30 text-orange-300 p-2 rounded-lg text-xs font-semibold border border-orange-500/50 transition-all" title="Check Conflicts">
+                              <AlertCircle className="w-4 h-4" />
+                            </button>
+                            <button onClick={() => deleteSchedule(schedule.id)} className="bg-red-500/20 hover:bg-red-500/30 text-red-300 p-2 rounded-lg text-xs font-semibold border border-red-500/50 transition-all" title="Delete Schedule">
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
                       </div>
 
                       {schedule.entries?.length > 0 && (
-                        <div className="space-y-2 mb-3">
+                        <div className="space-y-2">
                           {schedule.entries.map((entry, idx) => (
                             <div key={idx} className="bg-cyan-500/10 border border-cyan-500/30 p-3 rounded-lg text-sm">
                               <div className="font-semibold text-cyan-300 mb-1">{entry.subject}</div>
@@ -449,18 +551,6 @@ export default function ScheduleManagementApp() {
                           ))}
                         </div>
                       )}
-
-                      <div className="flex gap-2">
-                        <button onClick={() => optimizeSchedule(schedule.id)} className="flex-1 bg-gradient-to-r from-emerald-500 to-green-500 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-emerald-500/50 transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-1">
-                          <Zap className="w-4 h-4" /> Optimize
-                        </button>
-                        <button onClick={() => checkConflicts(schedule.id)} className="flex-1 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-orange-500/50 transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-1">
-                          <AlertCircle className="w-4 h-4" /> Conflicts
-                        </button>
-                        <button onClick={() => deleteSchedule(schedule.id)} className="flex-1 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-2 rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-red-500/50 transform hover:-translate-y-0.5 transition-all flex items-center justify-center gap-1">
-                          <Trash2 className="w-4 h-4" /> Delete
-                        </button>
-                      </div>
                     </div>
                   ))
                 )}

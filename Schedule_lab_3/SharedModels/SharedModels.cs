@@ -162,9 +162,11 @@ public enum OptimizationStatus
 
 public static class RabbitMqSettings
 {
-    public const string HostName = "rabbitmq";
-    public const string UserName = "planora";
-    public const string Password = "planora";
+    // Reads from environment variable, defaults to "localhost" for local development
+    public static string HostName => Environment.GetEnvironmentVariable("RabbitMQ__Host") ?? "localhost";
+    public static string UserName => Environment.GetEnvironmentVariable("RabbitMQ__Username") ?? "planora";
+    public static string Password => Environment.GetEnvironmentVariable("RabbitMQ__Password") ?? "planora";
+
     public const string ExchangeName = "schedule_exchange";
     public const string QueueName = "schedule_queue";
     public const string RoutingKeyOptimized = "schedule.optimized";

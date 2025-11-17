@@ -62,6 +62,87 @@ app.MapGet("/api/schedules/{id}", (int id, IScheduleRepository repo) =>
 
 app.MapPost("/api/schedules", async (Schedule schedule, IScheduleRepository repo, IRabbitMqPublisher publisher) =>
 {
+    Console.WriteLine($"[VALIDATION] Checking conflicts for schedule '{schedule.Name}' with {schedule.Entries.Count} entries");
+
+    // Validate required fields
+    if (string.IsNullOrWhiteSpace(schedule.Name))
+    {
+        return Results.BadRequest(new { error = "Schedule name is required" });
+    }
+
+    foreach (var entry in schedule.Entries)
+    {
+        if (string.IsNullOrWhiteSpace(entry.Subject) ||
+            string.IsNullOrWhiteSpace(entry.Teacher) ||
+            string.IsNullOrWhiteSpace(entry.Group) ||
+            string.IsNullOrWhiteSpace(entry.Room))
+        {
+            return Results.BadRequest(new { error = "All fields (Subject, Teacher, Group, Room) must be filled" });
+        }
+
+        if (entry.EndTime <= entry.StartTime)
+        {
+            return Results.BadRequest(new { error = "End time must be after start time" });
+        }
+    }
+
+    // Validate time slot conflicts WITHIN the schedule
+    var conflicts = CheckConflicts(schedule);
+    Console.WriteLine($"[VALIDATION] Found {conflicts.Count} internal conflicts");
+
+    if (conflicts.Any())
+    {
+        Console.WriteLine($"[VALIDATION] Rejecting schedule due to internal conflicts:");
+        conflicts.ForEach(c => Console.WriteLine($"  - {c}"));
+
+        // Publish conflict event even when schedule is rejected
+        var conflictEvent = new ConflictDetectedEvent
+        {
+            ScheduleId = 0, // Not yet created
+            ConflictType = "Internal",
+            AffectedEntities = conflicts,
+            Description = $"Found {conflicts.Count} internal conflicts in schedule '{schedule.Name}'",
+            DetectedAt = DateTime.Now
+        };
+        await publisher.PublishAsync(conflictEvent, RabbitMqSettings.RoutingKeyConflict);
+
+        return Results.BadRequest(new
+        {
+            error = "Schedule has conflicts",
+            conflicts = conflicts
+        });
+    }
+
+    // Validate conflicts with OTHER existing schedules
+    var existingSchedules = repo.GetAll();
+    var globalConflicts = CheckGlobalConflicts(schedule.Entries, existingSchedules);
+    Console.WriteLine($"[VALIDATION] Found {globalConflicts.Count} global conflicts");
+
+    if (globalConflicts.Any())
+    {
+        Console.WriteLine($"[VALIDATION] Rejecting schedule due to global conflicts:");
+        globalConflicts.ForEach(c => Console.WriteLine($"  - {c}"));
+
+        // Publish conflict event even when schedule is rejected
+        var conflictEvent = new ConflictDetectedEvent
+        {
+            ScheduleId = 0, // Not yet created
+            ConflictType = "Global",
+            AffectedEntities = globalConflicts,
+            Description = $"Found {globalConflicts.Count} conflicts with existing schedules for '{schedule.Name}'",
+            DetectedAt = DateTime.Now
+        };
+        await publisher.PublishAsync(conflictEvent, RabbitMqSettings.RoutingKeyConflict);
+
+        return Results.BadRequest(new
+        {
+            error = "Schedule conflicts with existing schedules",
+            conflicts = globalConflicts
+        });
+    }
+
+    Console.WriteLine($"[VALIDATION] No conflicts found, creating schedule");
+
     schedule.CreatedAt = DateTime.Now;
     schedule.Status = ScheduleStatus.Draft;
     repo.Add(schedule);
@@ -86,6 +167,52 @@ app.MapPut("/api/schedules/{id}", async (int id, Schedule schedule, IScheduleRep
 {
     var existing = repo.GetById(id);
     if (existing == null) return Results.NotFound();
+
+    // Validate required fields
+    if (string.IsNullOrWhiteSpace(schedule.Name))
+    {
+        return Results.BadRequest(new { error = "Schedule name is required" });
+    }
+
+    foreach (var entry in schedule.Entries)
+    {
+        if (string.IsNullOrWhiteSpace(entry.Subject) ||
+            string.IsNullOrWhiteSpace(entry.Teacher) ||
+            string.IsNullOrWhiteSpace(entry.Group) ||
+            string.IsNullOrWhiteSpace(entry.Room))
+        {
+            return Results.BadRequest(new { error = "All fields (Subject, Teacher, Group, Room) must be filled" });
+        }
+
+        if (entry.EndTime <= entry.StartTime)
+        {
+            return Results.BadRequest(new { error = "End time must be after start time" });
+        }
+    }
+
+    // Validate time slot conflicts WITHIN the schedule
+    var conflicts = CheckConflicts(schedule);
+    if (conflicts.Any())
+    {
+        return Results.BadRequest(new
+        {
+            error = "Schedule has conflicts",
+            conflicts = conflicts
+        });
+    }
+
+    // Validate conflicts with OTHER existing schedules (exclude current schedule being updated)
+    var existingSchedules = repo.GetAll().Where(s => s.Id != id).ToList();
+    var globalConflicts = CheckGlobalConflicts(schedule.Entries, existingSchedules);
+
+    if (globalConflicts.Any())
+    {
+        return Results.BadRequest(new
+        {
+            error = "Schedule conflicts with existing schedules",
+            conflicts = globalConflicts
+        });
+    }
 
     schedule.Id = id;
     repo.Update(schedule);
@@ -149,10 +276,11 @@ app.MapPost("/api/schedules/{id}/optimize", async (int id, IScheduleRepository r
         }
     };
 
-    var optimizationServiceUrl = "http://optimization_service:8080";
-    
+    // Read from environment, default to localhost:5002 for local development
+    var optimizationServiceUrl = Environment.GetEnvironmentVariable("OptimizationService__Url") ?? "http://localhost:5002";
+
     var response = await httpClient.PostAsJsonAsync(
-        $"{optimizationServiceUrl}/api/optimization/optimize", 
+        $"{optimizationServiceUrl}/api/optimization/optimize",
         request);
 
     if (response.IsSuccessStatusCode)
@@ -226,6 +354,55 @@ static List<string> CheckConflicts(Schedule schedule)
             if (e1.Room == e2.Room)
             {
                 conflicts.Add($"Room '{e1.Room}' is double-booked on {e1.DayOfWeek} at {e1.StartTime}");
+            }
+        }
+    }
+
+    return conflicts;
+}
+
+static List<string> CheckGlobalConflicts(List<ScheduleEntry> newEntries, List<Schedule> existingSchedules)
+{
+    var conflicts = new List<string>();
+
+    foreach (var newEntry in newEntries)
+    {
+        foreach (var existingSchedule in existingSchedules)
+        {
+            foreach (var existingEntry in existingSchedule.Entries)
+            {
+                // Перевірка чи той самий день
+                if (newEntry.DayOfWeek != existingEntry.DayOfWeek) continue;
+
+                // Перевірка чи є накладення часу
+                bool timeOverlap = newEntry.StartTime < existingEntry.EndTime &&
+                                   existingEntry.StartTime < newEntry.EndTime;
+
+                if (!timeOverlap) continue;
+
+                // Конфлікт по викладачу
+                if (!string.IsNullOrEmpty(newEntry.Teacher) &&
+                    !string.IsNullOrEmpty(existingEntry.Teacher) &&
+                    newEntry.Teacher.Equals(existingEntry.Teacher, StringComparison.OrdinalIgnoreCase))
+                {
+                    conflicts.Add($"Teacher '{newEntry.Teacher}' is already scheduled on {newEntry.DayOfWeek} from {existingEntry.StartTime:hh\\:mm} to {existingEntry.EndTime:hh\\:mm} in schedule '{existingSchedule.Name}'");
+                }
+
+                // Конфлікт по групі
+                if (!string.IsNullOrEmpty(newEntry.Group) &&
+                    !string.IsNullOrEmpty(existingEntry.Group) &&
+                    newEntry.Group.Equals(existingEntry.Group, StringComparison.OrdinalIgnoreCase))
+                {
+                    conflicts.Add($"Group '{newEntry.Group}' is already scheduled on {newEntry.DayOfWeek} from {existingEntry.StartTime:hh\\:mm} to {existingEntry.EndTime:hh\\:mm} in schedule '{existingSchedule.Name}'");
+                }
+
+                // Конфлікт по аудиторії
+                if (!string.IsNullOrEmpty(newEntry.Room) &&
+                    !string.IsNullOrEmpty(existingEntry.Room) &&
+                    newEntry.Room.Equals(existingEntry.Room, StringComparison.OrdinalIgnoreCase))
+                {
+                    conflicts.Add($"Room '{newEntry.Room}' is already booked on {newEntry.DayOfWeek} from {existingEntry.StartTime:hh\\:mm} to {existingEntry.EndTime:hh\\:mm} in schedule '{existingSchedule.Name}'");
+                }
             }
         }
     }

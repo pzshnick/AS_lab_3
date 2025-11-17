@@ -32,9 +32,12 @@ services:
       - RabbitMQ__Port=5672
       - RabbitMQ__Username=planora
       - RabbitMQ__Password=planora
+      - OptimizationService__Url=http://optimization_service:8080
     depends_on:
       rabbitmq:
         condition: service_healthy
+      optimization_service:
+        condition: service_started
     networks:
       - schedule_network
 
@@ -52,6 +55,7 @@ services:
       - RabbitMQ__Port=5672
       - RabbitMQ__Username=planora
       - RabbitMQ__Password=planora
+      - ScheduleService__Url=http://schedule_service:8080
     depends_on:
       rabbitmq:
         condition: service_healthy

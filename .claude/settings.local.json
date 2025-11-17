@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(docker logs:*)",
+      "Bash(docker stop:*)",
+      "Bash(docker rm:*)",
+      "Bash(docker run:*)",
+      "Bash(dotnet clean:*)",
+      "Bash(dotnet build:*)",
+      "Bash(findstr:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(timeout 5 sh:*)",
+      "Bash(timeout 30 sh:*)",
+      "Bash(timeout 60 sh:*)",
+      "Bash(docker ps:*)",
+      "Bash(docker-compose down:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File test-fixes.ps1)",
+      "Bash(docker-compose build:*)",
+      "Bash(powershell:*)",
+      "Bash(docker-compose restart:*)",
+      "Bash(docker restart:*)",
+      "Bash(curl:*)",
+      "Bash(python -m json.tool:*)",
+      "Bash(docker system prune:*)",
+      "Bash(timeout:*)",
+      "Bash(docker exec:*)",
+      "Bash(docker start:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
