@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text;
 using System.Text.Json;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Exceptions;
 using SharedModels;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -23,8 +24,16 @@ builder.Services.AddOpenTelemetry()
     });
 
 builder.Services.AddSingleton<IScheduleRepository, InMemoryScheduleRepository>();
-builder.Services.AddSingleton<IRabbitMqPublisher, RabbitMqPublisher>();
+builder.Services.AddScoped<IRabbitMqPublisher, RabbitMqPublisher>();
 builder.Services.AddHttpClient();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -33,6 +42,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.MapGet("/api/schedules", (IScheduleRepository repo) =>
 {
@@ -138,7 +149,11 @@ app.MapPost("/api/schedules/{id}/optimize", async (int id, IScheduleRepository r
         }
     };
 
-    var response = await httpClient.PostAsJsonAsync("http://localhost:5002/api/optimization/optimize", request);
+    var optimizationServiceUrl = "http://optimization_service:8080";
+    
+    var response = await httpClient.PostAsJsonAsync(
+        $"{optimizationServiceUrl}/api/optimization/optimize", 
+        request);
 
     if (response.IsSuccessStatusCode)
     {
@@ -262,27 +277,72 @@ public interface IRabbitMqPublisher
 
 public class RabbitMqPublisher : IRabbitMqPublisher, IDisposable
 {
-    private readonly IConnection _connection;
-    private readonly IChannel _channel;
+    private IConnection? _connection;
+    private IChannel? _channel;
+    private readonly ILogger<RabbitMqPublisher> _logger;
 
-    public RabbitMqPublisher()
+    public RabbitMqPublisher(ILogger<RabbitMqPublisher> logger)
     {
-        var factory = new ConnectionFactory { HostName = RabbitMqSettings.HostName };
-        _connection = factory.CreateConnectionAsync().GetAwaiter().GetResult();
-        _channel = _connection.CreateChannelAsync().GetAwaiter().GetResult();
+        _logger = logger;
+        InitializeConnection();
+    }
 
-        _channel.ExchangeDeclareAsync(
-            exchange: RabbitMqSettings.ExchangeName,
-            type: ExchangeType.Topic,
-            durable: true).GetAwaiter().GetResult();
+    private void InitializeConnection()
+    {
+        var factory = new ConnectionFactory 
+        { 
+            HostName = RabbitMqSettings.HostName,
+            UserName = RabbitMqSettings.UserName,
+            Password = RabbitMqSettings.Password,
+            RequestedConnectionTimeout = TimeSpan.FromSeconds(30),
+            SocketReadTimeout = TimeSpan.FromSeconds(30),
+            SocketWriteTimeout = TimeSpan.FromSeconds(30)
+        };
+
+        const int maxRetries = 10;
+        const int retryDelayMs = 2000;
+
+        for (int i = 1; i <= maxRetries; i++)
+        {
+            try
+            {
+                _logger.LogInformation("Attempting to connect to RabbitMQ... ({Attempt}/{MaxRetries})", i, maxRetries);
+                _connection = factory.CreateConnectionAsync().GetAwaiter().GetResult();
+                _channel = _connection.CreateChannelAsync().GetAwaiter().GetResult();
+
+                _channel.ExchangeDeclareAsync(
+                    exchange: RabbitMqSettings.ExchangeName,
+                    type: ExchangeType.Topic,
+                    durable: true).GetAwaiter().GetResult();
+
+                _logger.LogInformation("Successfully connected to RabbitMQ");
+                return;
+            }
+            catch (BrokerUnreachableException ex)
+            {
+                if (i == maxRetries)
+                {
+                    _logger.LogError(ex, "Failed to connect to RabbitMQ after {MaxRetries} attempts", maxRetries);
+                    throw;
+                }
+                _logger.LogWarning("Connection failed (attempt {Attempt}/{MaxRetries}): {Message}", i, maxRetries, ex.Message);
+                Thread.Sleep(retryDelayMs);
+            }
+        }
     }
 
     public async Task PublishAsync<T>(T message, string routingKey)
     {
+        if (_channel == null)
+        {
+            _logger.LogWarning("Channel is null, attempting to reconnect...");
+            InitializeConnection();
+        }
+
         var json = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(json);
 
-        await _channel.BasicPublishAsync(
+        await _channel!.BasicPublishAsync(
             exchange: RabbitMqSettings.ExchangeName,
             routingKey: routingKey,
             body: body);

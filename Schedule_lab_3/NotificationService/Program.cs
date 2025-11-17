@@ -2,9 +2,11 @@ using System.Text;
 using System.Text.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RabbitMQ.Client.Exceptions;
 using SharedModels;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Microsoft.Extensions.Configuration;
 
 var tracerProvider = OpenTelemetry.Sdk.CreateTracerProviderBuilder()
     .AddSource("NotificationService")
@@ -18,78 +20,136 @@ Console.WriteLine("╔═══════════════════�
 Console.WriteLine("║   Schedule Notification Service (Consumer)                ║");
 Console.WriteLine("╚═══════════════════════════════════════════════════════════╝\n");
 
+// Читаємо конфігурацію
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false)
+    .AddEnvironmentVariables()
+    .Build();
+
+var rabbitHost = configuration["RabbitMQ:Host"] ?? "localhost";
+var rabbitPort = int.Parse(configuration["RabbitMQ:Port"] ?? "5672");
+var rabbitUser = configuration["RabbitMQ:Username"] ?? "guest";
+var rabbitPass = configuration["RabbitMQ:Password"] ?? "guest";
+
+Console.WriteLine($"RabbitMQ Config: {rabbitUser}@{rabbitHost}:{rabbitPort}");
+
 try
 {
-    var factory = new ConnectionFactory { HostName = RabbitMqSettings.HostName };
-    await using var connection = await factory.CreateConnectionAsync();
-    await using var channel = await connection.CreateChannelAsync();
+    // Retry логіка для підключення
+    var factory = new ConnectionFactory 
+    { 
+        HostName = rabbitHost,
+        Port = rabbitPort,
+        UserName = rabbitUser,
+        Password = rabbitPass,
+        RequestedConnectionTimeout = TimeSpan.FromSeconds(30),
+        SocketReadTimeout = TimeSpan.FromSeconds(30),
+        SocketWriteTimeout = TimeSpan.FromSeconds(30)
+    };
 
-    await channel.ExchangeDeclareAsync(
-        exchange: RabbitMqSettings.ExchangeName,
-        type: ExchangeType.Topic,
-        durable: true);
+    IConnection? connection = null;
+    const int maxRetries = 30;
+    const int retryDelayMs = 2000;
 
-    await channel.QueueDeclareAsync(
-        queue: RabbitMqSettings.QueueName,
-        durable: false,
-        exclusive: false,
-        autoDelete: false);
-
-    await channel.QueueBindAsync(
-        queue: RabbitMqSettings.QueueName,
-        exchange: RabbitMqSettings.ExchangeName,
-        routingKey: "schedule.*");
-
-    Console.WriteLine($"✓ Connected to RabbitMQ");
-    Console.WriteLine($"✓ Queue '{RabbitMqSettings.QueueName}' bound to pattern 'schedule.*'\n");
-    Console.WriteLine($"Notifications will be saved to: {Path.GetFullPath(NotificationsFile)}\n");
-
-    var consumer = new AsyncEventingBasicConsumer(channel);
-    consumer.ReceivedAsync += async (model, ea) =>
+    for (int i = 1; i <= maxRetries; i++)
     {
         try
         {
-            var body = ea.Body.ToArray();
-            var json = Encoding.UTF8.GetString(body);
-            var routingKey = ea.RoutingKey;
-
-            Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] Received: {routingKey}");
-
-            string notificationText = routingKey switch
+            Console.WriteLine($"[{i}/{maxRetries}] Attempting to connect to RabbitMQ...");
+            connection = await factory.CreateConnectionAsync();
+            Console.WriteLine("✓ Connected to RabbitMQ successfully!\n");
+            break;
+        }
+        catch (BrokerUnreachableException ex)
+        {
+            if (i == maxRetries)
             {
-                var key when key == RabbitMqSettings.RoutingKeyOptimized =>
-                    await ProcessOptimizationEvent(json),
-                var key when key == RabbitMqSettings.RoutingKeyUpdated =>
-                    await ProcessUpdateEvent(json),
-                var key when key == RabbitMqSettings.RoutingKeyConflict =>
-                    await ProcessConflictEvent(json),
-                _ => $"Unknown routing key: {routingKey}"
-            };
-
-            await SaveNotification(notificationText);
+                Console.WriteLine($"[FATAL] Failed to connect after {maxRetries} attempts");
+                throw;
+            }
+            Console.WriteLine($"[WARN] Connection failed: {ex.Message}. Retrying in {retryDelayMs}ms...");
+            await Task.Delay(retryDelayMs);
         }
-        catch (JsonException jsonEx)
+    }
+
+    if (connection == null)
+    {
+        throw new Exception("Failed to establish RabbitMQ connection");
+    }
+
+    await using (connection)
+    {
+        await using var channel = await connection.CreateChannelAsync();
+
+        await channel.ExchangeDeclareAsync(
+            exchange: RabbitMqSettings.ExchangeName,
+            type: ExchangeType.Topic,
+            durable: true);
+
+        await channel.QueueDeclareAsync(
+            queue: RabbitMqSettings.QueueName,
+            durable: false,
+            exclusive: false,
+            autoDelete: false);
+
+        await channel.QueueBindAsync(
+            queue: RabbitMqSettings.QueueName,
+            exchange: RabbitMqSettings.ExchangeName,
+            routingKey: "schedule.*");
+
+        Console.WriteLine($"✓ Queue '{RabbitMqSettings.QueueName}' bound to pattern 'schedule.*'\n");
+        Console.WriteLine($"Notifications will be saved to: {Path.GetFullPath(NotificationsFile)}\n");
+
+        var consumer = new AsyncEventingBasicConsumer(channel);
+        consumer.ReceivedAsync += async (model, ea) =>
         {
-            Console.WriteLine($"[ERROR] Failed to deserialize: {jsonEx.Message}");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"[ERROR] Processing error: {ex.Message}");
-        }
-        await Task.Yield();
-    };
+            try
+            {
+                var body = ea.Body.ToArray();
+                var json = Encoding.UTF8.GetString(body);
+                var routingKey = ea.RoutingKey;
 
-    await channel.BasicConsumeAsync(
-        queue: RabbitMqSettings.QueueName,
-        autoAck: true,
-        consumer: consumer);
+                Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] Received: {routingKey}");
 
-    Console.WriteLine("Press [Enter] to exit.\n");
-    Console.ReadLine();
+                string notificationText = routingKey switch
+                {
+                    var key when key == RabbitMqSettings.RoutingKeyOptimized =>
+                        await ProcessOptimizationEvent(json),
+                    var key when key == RabbitMqSettings.RoutingKeyUpdated =>
+                        await ProcessUpdateEvent(json),
+                    var key when key == RabbitMqSettings.RoutingKeyConflict =>
+                        await ProcessConflictEvent(json),
+                    _ => $"Unknown routing key: {routingKey}"
+                };
+
+                await SaveNotification(notificationText);
+            }
+            catch (JsonException jsonEx)
+            {
+                Console.WriteLine($"[ERROR] Failed to deserialize: {jsonEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[ERROR] Processing error: {ex.Message}");
+            }
+            await Task.Yield();
+        };
+
+        await channel.BasicConsumeAsync(
+            queue: RabbitMqSettings.QueueName,
+            autoAck: true,
+            consumer: consumer);
+
+        Console.WriteLine("✓ Consumer started. Press [Enter] to exit.\n");
+        Console.ReadLine();
+    }
 }
 catch (Exception ex)
 {
     Console.WriteLine($"[FATAL] Service failed: {ex.Message}");
+    Console.WriteLine($"Stack trace: {ex.StackTrace}");
+    Environment.Exit(1);
 }
 finally
 {

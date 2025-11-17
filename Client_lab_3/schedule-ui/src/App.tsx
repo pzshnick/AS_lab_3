@@ -104,10 +104,11 @@ export default function ScheduleManagementApp() {
 
   const loadCatalogData = async (): Promise<void> => {
     try {
+      // ✅ Використовуємо /api/catalog замість localhost
       const [teachersRes, groupsRes, roomsRes] = await Promise.all([
-        fetch("http://localhost:5103/api/catalog/teachers"),
-        fetch("http://localhost:5103/api/catalog/groups"),
-        fetch("http://localhost:5103/api/catalog/rooms"),
+        fetch("/api/catalog/teachers"),
+        fetch("/api/catalog/groups"),
+        fetch("/api/catalog/rooms"),
       ]);
       
       setTeachers(await teachersRes.json());
@@ -120,7 +121,8 @@ export default function ScheduleManagementApp() {
 
   const loadStatistics = async (): Promise<void> => {
     try {
-      const res = await fetch("http://localhost:5004/api/analytics/stats");
+      // ✅ Використовуємо /api/analytics замість localhost
+      const res = await fetch("/api/analytics/stats");
       const data = await res.json();
       setStatistics(data);
     } catch (error) {

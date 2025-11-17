@@ -163,10 +163,11 @@ public enum OptimizationStatus
 public static class RabbitMqSettings
 {
     public const string HostName = "rabbitmq";
+    public const string UserName = "planora";
+    public const string Password = "planora";
     public const string ExchangeName = "schedule_exchange";
     public const string QueueName = "schedule_queue";
     public const string RoutingKeyOptimized = "schedule.optimized";
-    public const string RoutingKeyUpdated   = "schedule.updated";
-    public const string RoutingKeyConflict  = "schedule.conflict";
+    public const string RoutingKeyUpdated = "schedule.updated";
+    public const string RoutingKeyConflict = "schedule.conflict";
 }
-

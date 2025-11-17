@@ -238,7 +238,12 @@ public class RabbitMqPublisher : IRabbitMqPublisher, IDisposable
 
     public RabbitMqPublisher()
     {
-        var factory = new ConnectionFactory { HostName = RabbitMqSettings.HostName };
+        var factory = new ConnectionFactory 
+        { 
+            HostName = RabbitMqSettings.HostName,
+            UserName = RabbitMqSettings.UserName, 
+            Password = RabbitMqSettings.Password  
+        };
         _connection = factory.CreateConnectionAsync().GetAwaiter().GetResult();
         _channel = _connection.CreateChannelAsync().GetAwaiter().GetResult();
 

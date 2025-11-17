@@ -1,116 +1,147 @@
-name: as_lab_3
+version: '3.9'
 
 services:
   rabbitmq:
     image: rabbitmq:3.13-management
-    container_name: schedule_rabbitmq
+    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: planora
+      RABBITMQ_DEFAULT_PASS: planora
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
       interval: 5s
-      timeout: 3s
+      timeout: 5s
       retries: 20
-
-
-  catalog_service:
-    build:
-      context: ./Schedule_lab_3
-      dockerfile: CatalogService/Dockerfile
-    container_name: catalog_service
-    environment:
-      - ASPNETCORE_URLS=http://+:8080
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-    restart: unless-stopped
     networks:
-      - app_network
-    # ports:
-    #   - "5001:8080"  # (за потреби Swagger локально)
+      - schedule_network
 
   schedule_service:
     build:
       context: ./Schedule_lab_3
       dockerfile: ScheduleService/Dockerfile
     container_name: schedule_service
+    ports:
+      - "5001:8080"
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Port=5672
+      - RabbitMQ__Username=planora
+      - RabbitMQ__Password=planora
     depends_on:
       rabbitmq:
         condition: service_healthy
-    restart: unless-stopped
     networks:
-      - app_network
-    # ports:
-    #   - "5002:8080"
-
-  analytics_service:
-    build:
-      context: ./Schedule_lab_3
-      dockerfile: AnalyticsService/Dockerfile
-    container_name: analytics_service
-    environment:
-      - ASPNETCORE_URLS=http://+:8080
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - app_network
-    # ports:
-    #   - "5003:8080"
-
-  notification_service:
-    build:
-      context: ./Schedule_lab_3
-      dockerfile: NotificationService/Dockerfile
-    container_name: notification_service
-    environment:
-      - ASPNETCORE_URLS=http://+:8080
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-    restart: unless-stopped
-    networks:
-      - app_network
-    # ports:
-    #   - "5004:8080"
+      - schedule_network
 
   optimization_service:
     build:
       context: ./Schedule_lab_3
       dockerfile: OptimizationService/Dockerfile
     container_name: optimization_service
+    ports:
+      - "5002:8080"
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Port=5672
+      - RabbitMQ__Username=planora
+      - RabbitMQ__Password=planora
     depends_on:
       rabbitmq:
         condition: service_healthy
-    restart: unless-stopped
     networks:
-      - app_network
-    # ports:
-    #   - "5005:8080"
+      - schedule_network
+
+  notification_service:
+    build:
+      context: ./Schedule_lab_3
+      dockerfile: NotificationService/Dockerfile
+    container_name: notification_service
+    ports:
+      - "5003:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Port=5672
+      - RabbitMQ__Username=planora
+      - RabbitMQ__Password=planora
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - schedule_network
+    volumes:
+      - notification_logs:/app/logs
+    restart: on-failure
+
+  catalog_service:
+    build:
+      context: ./Schedule_lab_3
+      dockerfile: CatalogService/Dockerfile
+    container_name: catalog_service
+    ports:
+      - "5005:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Port=5672
+      - RabbitMQ__Username=planora
+      - RabbitMQ__Password=planora
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - schedule_network
+
+  analytics_service:
+    build:
+      context: ./Schedule_lab_3
+      dockerfile: AnalyticsService/Dockerfile
+    container_name: analytics_service
+    ports:
+      - "5004:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - RabbitMQ__Host=rabbitmq
+      - RabbitMQ__Port=5672
+      - RabbitMQ__Username=planora
+      - RabbitMQ__Password=planora
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - schedule_network
 
   frontend:
     build:
       context: ./Client_lab_3/schedule-ui
       dockerfile: Dockerfile
-    container_name: frontend
+    container_name: schedule_frontend
     ports:
       - "3000:80"
     depends_on:
       - schedule_service
+      - optimization_service
       - catalog_service
       - analytics_service
       - notification_service
-      - optimization_service
-    restart: unless-stopped
     networks:
-      - app_network
+      - schedule_network
+    volumes:
+      - ./Client_lab_3/schedule-ui/nginx.conf:/etc/nginx/conf.d/default.conf:ro
 
 networks:
-  app_network:
+  schedule_network:
     driver: bridge
+
+volumes:
+  notification_logs:

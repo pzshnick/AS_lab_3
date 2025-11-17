@@ -1,23 +1,32 @@
-# 1) Build stage (alpine + реінсталяція без старого lock)
-FROM node:22-alpine AS builder
+# === Build stage ===
+FROM node:20-bookworm AS build
 WORKDIR /app
 
-# Копіюємо маніфести
+# Копіюємо тільки маніфести для кращого кешування
 COPY package*.json ./
 
-# ВАЖЛИВО: прибираємо lock, щоб npm розв'язав платформи під linux-musl
-RUN rm -f package-lock.json
-RUN npm install --no-audit --no-fund
+# Спочатку пробуємо reproducible інсталяцію,
+# якщо спрацьовує npm-баґ з optional deps — робимо fallback без lockfile
+RUN npm ci || (rm -rf node_modules package-lock.json && npm install)
 
-# Копіюємо решту коду і будуємо
+# Далі код
 COPY . .
+
+# Явно ставимо нативний бінар Rollup під поточну платформу
+# (BuildKit передає TARGETPLATFORM: linux/amd64 або linux/arm64)
+ARG TARGETPLATFORM
+RUN set -eux; \
+    case "$TARGETPLATFORM" in \
+      "linux/amd64") npm i -D @rollup/rollup-linux-x64-gnu ;; \
+      "linux/arm64") npm i -D @rollup/rollup-linux-arm64-gnu ;; \
+      *) echo "Unknown platform: $TARGETPLATFORM; trying x64-gnu"; npm i -D @rollup/rollup-linux-x64-gnu || true ;; \
+    esac
+
+# Білд фронтенду
 RUN npm run build
 
-# 2) Runtime: nginx
-FROM nginx:1.28-alpine
-WORKDIR /usr/share/nginx/html
-
-COPY --from=builder /app/dist ./
-COPY ./nginx.conf /etc/nginx/nginx.conf
-
+# === Production stage ===
+FROM nginx:alpine AS production
+COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 80
+CMD ["nginx","-g","daemon off;"]
